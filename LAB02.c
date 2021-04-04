@@ -9,22 +9,27 @@
 /* Prof. Eliane */
 /*************************************/
 #include <stdio.h>
+#include <string.h>
 #include <locale.h>
 #include <conio.h>
-int main(){
+int main (void ){
 	setlocale(LC_ALL,"Portuguese");
-	int eleitores=4, i=1;
-	char controle, prefeito[2], vereador[2];
+	int eleitores=4, contador=1, c1=0, c2=0, c3=0, c4=0, vb1=0, vb2=0, vn1=0, vn2=0, v1=0, v2=0, v3=0, v4=0, maior,menor;
+	char controle[2], prefeito[3], vereador[3];
 	//1.1 Abrir uma urna eletrônica com os dados de identificação (Números da Zona, Seção e Total de Eleitores Esperados). Lembre-se que nem todos os eleitores comparecem no dia da eleição.
 	printf(" ------------------------------------------------------------------------");
 	printf("\n                  IDENTIFICAÇÃO DA URNA ELETRÔNICA\n");
 	printf(" ------------------------------------------------------------------------");
 	printf("\n Identificação da Seção e Zona Eleitoral......: 189, 0321");
 	printf("\n Total dos Eleitores que podem votar..........: %d",eleitores);
-	printf("\n Código de Identificação da Urna Eletrônica...: 1");
-getch();
+	printf("\n Código de Identificação da Urna Eletrônica...: 1\n");
+    printf("\n *Aperte Enter para iniciar a votação*");
+    getch();
+    system("clear||cls");
+    
 	//1.2) Receber os votos individuais dos eleitores de uma seção eleitoral para cada candidato, partido e para cada legenda partidária, agrupados por cargo.
 	do{
+		printf("\n ********  VOTE NO PREFEITO INSERINDO A SIGLA CORRESPONDENTE:  *********");
 		printf("\n ________________________________________________________________________\n");
 		printf("\n                       CANDIDATOS A PREFEITO\n");
 		printf(" ------------------------------------------------------------------------");
@@ -42,6 +47,25 @@ getch();
 		printf(" ------------------------------------------------------------------------");
 		printf("\n                      ---   |      NULO     |  VN\n");
 		printf("\n ________________________________________________________________________\n\n");
+		printf(" Digite a sigla do Prefeito: ");
+		scanf("%s", prefeito);		
+		
+		//1.3.1) Total de votos para cada candidato agrupados por cargo
+		if(strcmp(prefeito,"c1")==0 || strcmp(prefeito,"C1")==0)
+			c1++;
+		if(strcmp(prefeito,"c2")==0 || strcmp(prefeito,"C2")==0)
+			c2++;
+		if(strcmp(prefeito,"c3")==0 || strcmp(prefeito,"C3")==0)
+			c3++;
+		if(strcmp(prefeito,"c4")==0 || strcmp(prefeito,"C4")==0)
+			c4++;
+		if(strcmp(prefeito,"vb")==0 || strcmp(prefeito,"VB")==0)
+			vb1++;
+		if(strcmp(prefeito,"VN")==0 || strcmp(prefeito,"vn")==0)
+			vn1++;			
+		system("clear||cls");
+		
+		printf("\n ********  VOTE NO VEREADOR INSERINDO A SIGLA CORRESPONDENTE:  *********");
 		printf("\n\n ________________________________________________________________________\n");
 		printf("\n                       CANDIDATOS A VEREADOR\n");
 		printf(" ------------------------------------------------------------------------");
@@ -59,38 +83,119 @@ getch();
 		printf(" ------------------------------------------------------------------------");
 		printf("\n                      ---   |      NULO     |  VN\n");
 		printf("\n ________________________________________________________________________\n");
+		printf(" Digite a sigla do Vereador: ");
+		scanf("%s", vereador);
+		
+		//1.3.1) Total de votos para cada candidato agrupados por cargo
+		if(strcmp(vereador,"v1")==0 || strcmp(vereador,"V1")==0)
+			v1++;
+		if(strcmp(vereador,"v2")==0 || strcmp(vereador,"V2")==0)
+			v2++;
+		if(strcmp(vereador,"v3")==0 || strcmp(vereador,"V3")==0)
+			v3++;
+		if(strcmp(vereador,"v4")==0 || strcmp(vereador,"V4")==0)
+			v4++;
+		if(strcmp(vereador,"vb")==0 || strcmp(vereador,"VB")==0)
+			vb2++;
+		if(strcmp(vereador,"VN")==0 || strcmp(vereador,"vn")==0)
+			vn2++;
+		system("clear||cls");
+								
+		//Informações da votação do eleitor.	
 		printf(" ------------------------------------------------------------------------");
 		printf("\n                           VOTAÇÃO INDIVIDUAL:\n");
 		printf(" ------------------------------------------------------------------------");
-		printf("\n Eleitor %d:",i);
-		printf("\n Voto ao Candidato à Prefeitura..:");
-		scanf("%s",prefeito);
-		printf("\n Voto ao Candidato a Vereador....:");
-		scanf("%s",vereador);
+		printf("\n Eleitor %d:",contador);
+		printf("\n Voto ao Candidato a Prefeito..: %s",prefeito);
+		printf("\n Voto ao Candidato a Vereador..: %s",vereador);
+		contador++;
 		
-		printf("\n prefeito votado:%s",prefeito);
-		printf("\n vereador vorado:%s",vereador);
-		printf("\neleitores laco:%d",eleitores);
-		
-		i++;
-getch();
-		system("clear||cls");
-	}while(i<=eleitores || controle==2);
+		//Decisão para finalizar a votação antes do número máximo de eleitores ser atingido.
+		printf("\n\n\n Deseja iniciar o proximo voto? Caso não, o processo de votação se encerra.");
+		printf("\n digite: [S]-Sim || [N]-Não : ");
+		scanf("%s",controle);
+		system("clear||cls");		
+	}while((contador<=eleitores||contador==eleitores)&&strcmp(controle,"n")==1);
+	
+	//Calcular prefeito vencedor:
+	if(c1>c2){
+		if(c1>c3)
+			if(c1>c4)
+				prefeito[3]="C1";
+	}
+	else{
+		if(c2>c3){
+			if(c2>c4)	
+			prefeito[3]="C2";	
+		}
+		else{
+			if(c3>c4)
+				prefeito[3]="C3";
+			else
+				prefeito[3]="C4";	
+		}
+	}
+	//Calcular vereador vencedor:
+	if(v1>v2){
+		if(v1>v3)
+			if(v1>v4)
+				vereador[3]="V1";	
+	}
+	else{
+		if(v2>v3){
+			if(v2>v4)	
+				vereador[3]="V2";
+		}
+		else{
+			if(v3>v4)
+				vereador[3]="V3";
+			else
+				vereador[3]="V4";
+		}
+	}
+	
+	//Mensagem para informar que todos os eleitores da seção votaram.
+	if(eleitores<=contador)
+	printf("\nVotação finalizada. Número máximo de eleitores da seção atingida.\n");
+	printf("Aperte Enter para exibir o resultado final:\n");
+	getch();
+	system("clear||cls");
 	
 	//1.4) Divulgação dos resultados ao término do processo de votação.
-	printf(" ------------------------------------------------------------------------");
-	printf("\n                  RESULTADO DA ELEIÇÃO NA URNA:\n");
-	printf(" ------------------------------------------------------------------------");
-	printf("\n Identificação da Seção e Zona Eleitoral......: 189, 0321");
-	printf("\n Total dos Eleitores que podem votar..........: %d",eleitores);
-	printf("\n Total dos Eleitores que votaram..............: %d",i);
-	printf("\n Total de eleitores que faltaram..............: %d",eleitores-i);
-	printf("\n Código de Identificação da Urna Eletrônica...: 1");
-	printf("\n Total de votos em branco e nulos, agrupados por cargo");
+	printf(" -------------------------------------------------------");
+	printf("\n           RESULTADO DA ELEIÇÃO NA URNA:\n");
+	printf(" -------------------------------------------------------");
+	printf("\n Identificação da Seção e Zona Eleitoral...: 189, 0321");
+	printf("\n Total dos Eleitores que podem votar.......: %d",eleitores);
+	printf("\n Total dos Eleitores que votaram...........: %d",contador-1);
+	printf("\n Total de eleitores que faltaram...........: %d",eleitores-contador+1);
+	printf("\n Código de Identificação da Urna Eletrônica: 1");
+	printf("\n Total de votos em branco por cargo........:");
+	printf("\n Prefeito..................................: %d",vb1);
+	printf("\n Vereador..................................: %d",vb2);
+	printf("\n Total de votos nulos por cargo............:");
+	printf("\n Prefeito..................................: %d",vn1);
+	printf("\n Vereador..................................: %d",vn2);
 	printf("\n Total de votos apurados por cargo");
-	
-	printf("\n ");
-	printf("\n ");
+	printf("\n Prefeito..................................: %d",c1+c2+c3+c4);
+	printf("\n Vereador..................................: %d\n\n\n",v1+v2+v3+v4);
+	//a) votação individual para cada candidato, partido e para cada legenda partidária, agrupados por cargo;
+	printf("\n Número de votos para o Partido PDB........: %d",c1+c2+v1+v2);
+	printf("\n Número de votos para o Partido PSB........: %d\n",c3+c4+v3+v4);
+	printf("\n Número de votos para o Candidato C1.......: %d",c1);
+	printf("\n Número de votos para o Candidato C2.......: %d",c2);
+	printf("\n Número de votos para o Candidato C3.......: %d",c3);
+	printf("\n Número de votos para o Candidato C4.......: %d",c4);
+	printf("\n Número de votos brancos...................: %d",vb1);
+	printf("\n Número de votos nulos.....................: %d\n\n",vn1);
+	printf("\n Número de votos para o Candidato V1.......: %d",v1);
+	printf("\n Número de votos para o Candidato V2.......: %d",v2);
+	printf("\n Número de votos para o Candidato V3.......: %d",v3);
+	printf("\n Número de votos para o Candidato V4.......: %d",v4);
+	printf("\n Número de votos brancos...................: %d",vb2);
+	printf("\n Número de votos nulos.....................: %d\n\n",vb2);
+	printf("\n Candidato a Prefeito mais votado..........: %s\n",prefeito);
+	printf("\n Candidato a Vereador mais votado..........: %s",vereador);
 	getch();
 	return 0;
 }
