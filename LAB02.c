@@ -117,7 +117,8 @@ int main(void){
 		system("clear||cls");		
 	}while((contador<=eleitores||contador==eleitores) && strcmp(controle,"n")==1);
 	contador--;
-	
+	strcpy(prefeito,"Empate");
+	strcpy(vereador,"Empate");
 	//Calcular prefeito vencedor:
 	if(c1>c2)
 		if(c1>c3)
