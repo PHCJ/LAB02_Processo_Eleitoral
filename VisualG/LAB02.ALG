@@ -20,7 +20,7 @@ Inicio
    escreval(" ------------------------------------------------------------")
    escreval(" Identificação da Seção e Zona Eleitoral......: 189, 0321")
    escreval(" Total dos Eleitores que podem votar..........:",eleitores)
-   escreval(" Código de Identificação da Urna Eletrônica...: 1")
+   escreval(" Código de Identificação da Urna Eletrônica...: 001")
    escreva(" *Aperte Enter para iniciar a votação*")
    leia(controle)  //pausa na tela
    limpatela
@@ -184,7 +184,7 @@ Inicio
    escreval(" Total dos Eleitores que podem votar.......: ",eleitores)
    escreval(" Total dos Eleitores que votaram...........: ",contador)
    escreval(" Total de eleitores que faltaram...........: ",eleitores-contador)
-   escreval(" Código de Identificação da Urna Eletrônica:  1")
+   escreval(" Código de Identificação da Urna Eletrônica:  001")
    escreval(" Total de votos em branco por cargo........:")
    escreval(" Prefeito..................................: ",vb1)
    escreval(" Vereador..................................: ",vb2)
